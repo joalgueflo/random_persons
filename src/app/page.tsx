@@ -3,15 +3,16 @@
 import React, { useState } from 'react';
 import { usePeopleApi } from './hooks/usePeopleApi';
 import { format } from 'date-fns';
+import { Person } from './types/person';
 
 export default function RandomPersonGenerator() {
   const { currentPerson, personHistory, loading, error, fetchData } = usePeopleApi();
-  const [selectedPerson, setSelectedPerson] = useState(null);
+  const [selectedPerson, setSelectedPerson] = useState<Person | null>(null);
 
   // The person to display is either the selected one from history or the current one
   const displayPerson = selectedPerson || currentPerson;
 
-  const formatDate = (dateString) => {
+  const formatDate = (dateString: string) => {
     try {
       return format(new Date(dateString), 'MMMM dd, yyyy');
     } catch (e) {
@@ -19,7 +20,7 @@ export default function RandomPersonGenerator() {
     }
   };
 
-  const handleHistoryClick = (person) => {
+  const handleHistoryClick = (person: Person) => {
     setSelectedPerson(person);
   };
 

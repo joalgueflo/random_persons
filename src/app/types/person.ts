@@ -4,5 +4,5 @@ export interface Person {
     birthday: string
     phone: string
     password: string
-    image: string
+    image?: string
 }
