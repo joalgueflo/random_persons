@@ -22,7 +22,8 @@ export const usePeopleApi = () => {
                 email: data.email,
                 birthday: data.dob.date,
                 phone: data.phone,
-                password: data.login.password
+                password: data.login.password,
+                image: data.picture.large
             }
             setPerson(person)
             setPersonHistory((personList) => [...personList, person])
