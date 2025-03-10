@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { usePeopleApi } from './hooks/usePeopleApi';
 import { format } from 'date-fns';
 import { Person } from './types/person';
+import Image from 'next/image';
 
 export default function RandomPersonGenerator() {
   const { currentPerson, personHistory, loading, error, fetchData } = usePeopleApi();
@@ -12,11 +13,11 @@ export default function RandomPersonGenerator() {
   // The person to display is either the selected one from history or the current one
   const displayPerson = selectedPerson || currentPerson;
 
-  const formatDate = (dateString: string) => {
+    const formatDate = (dateString: string) => {
     try {
       return format(new Date(dateString), 'MMMM dd, yyyy');
-    } catch (e) {
-      return dateString;
+    } catch {
+      return 'Invalid date';
     }
   };
 
@@ -48,7 +49,7 @@ export default function RandomPersonGenerator() {
               >
                 <div className="flex items-center gap-2">
                   {person.image && (
-                    <img 
+                    <Image 
                       src={person.image} 
                       alt={`${person.name}'s thumbnail`}
                       className="w-8 h-8 rounded-full object-cover"
@@ -98,7 +99,7 @@ export default function RandomPersonGenerator() {
                 {/* Person image */}
                 <div className="w-full md:w-1/3 bg-gray-100 flex items-center justify-center p-4">
                   {displayPerson.image ? (
-                    <img 
+                    <Image
                       src={displayPerson.image} 
                       alt={`${displayPerson.name}'s profile picture`}
                       className="w-40 h-40 rounded-full object-cover shadow-md"
